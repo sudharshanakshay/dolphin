@@ -9,21 +9,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Login extends AppCompatActivity {
 
     Button signIn_button;
     TextView signIn_username, signIn_password;
 
-//    String regularExpression = "Expression\"^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[@$!][A-Zaz\\\\n" +
-//            "d@$!]{8,}$";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login2);
+        setContentView(R.layout.activity_login);
 
         signIn_button = (Button) findViewById(R.id.singIn);
         signIn_username = (TextView) findViewById(R.id.signIn_username);
@@ -57,11 +51,11 @@ public class Login extends AppCompatActivity {
 //                }
                 if (username.equals(username_from_signUp) && password.equals(password_from_signUp)) {
 
-                    Intent goto_landingPage = new Intent(SignIn.this, LandingPage.class);
+                    Intent goto_landingPage = new Intent(Login.this, MainActivity.class);
                     startActivity(goto_landingPage);
 
                 }else{
-                    Toast.makeText(SignIn.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
                 }
             }
         });
