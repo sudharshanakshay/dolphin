@@ -1,11 +1,10 @@
 package com.example.dolphin;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.regex.Matcher;
@@ -16,51 +15,46 @@ import static java.util.regex.Pattern.compile;
 public class Register extends AppCompatActivity {
 
     Button signUp_button;
-    TextView signUp_username, signUp_password;
+    EditText username, password, name, email;
 
     String regularExpression = "^([A-Z]+)([a-z0-9]*)([@$!][A-Za-z0-9])";
-//    String regularExpression = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!][A-Za-z\\d@$!]{8,})$";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        signUp_username = (TextView) findViewById(R.id.signUp_username);
-        signUp_password = (TextView) findViewById(R.id.signUp_password);
-        signUp_button = (Button) findViewById(R.id.signUp);
+        name = (EditText) findViewById(R.id.r_name);
+        username = (EditText) findViewById(R.id.r_username);
+        email = (EditText) findViewById(R.id.r_email);
+        password = (EditText) findViewById(R.id.r_password);
+
+
+        signUp_button = (Button) findViewById(R.id.signIn);
 
         signUp_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = signUp_username.getText().toString();
-                String password = signUp_password.getText().toString();
+                String r_name = name.getText().toString();
+                String r_username = username.getText().toString();
+                String r_email = email.getText().toString();
+                String r_password = password.getText().toString();
 
-                if (!validatePassword(password)) {
-                    Toast.makeText(SignUp.this, "password has some constraint!", Toast.LENGTH_SHORT).show();
+                if (!validatePassword(r_password)) {
+                    Toast.makeText(Register.this, "password has some constraint!", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("username", username);
-                    bundle.putString("password", password);
-
-                    Intent goto_landingPage = new Intent(Register.this, SignIn.class);
-
-                    goto_landingPage.putExtras(bundle);
-                    startActivity(goto_landingPage);
 
                 }
-//                Intent goto_landingPage = new Intent(SignUp.this, SignIn.class);
-//                startActivity(goto_landingPage);
-
             }
         });
 
     }
-    public boolean validatePassword( String pwd){
+
+    public boolean validatePassword(String pass) {
         Pattern pattern = Pattern.compile(regularExpression);
-        Matcher matcher = pattern.matcher(pwd);
+        Matcher matcher = pattern.matcher(pass);
 
         return matcher.matches();
     }
+}
