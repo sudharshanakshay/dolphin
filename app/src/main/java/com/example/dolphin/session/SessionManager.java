@@ -18,7 +18,7 @@ public class SessionManager {
 
     //pref file name
     private  String PREF_NAME = "dolphinPref";
-    private  boolean IS_LOGIN = false;
+    private  String IS_LOGIN = "is_login";
     public   String KEY_NAME = "name";
     public   String KEY_EMAIL = "email";
 
@@ -29,7 +29,7 @@ public class SessionManager {
     }
 
     public void createLoginSession(String name, String email){
-        editor.putBoolean(String.valueOf(IS_LOGIN), true);
+        editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_NAME, name);
         editor.putString(KEY_EMAIL, email);
         editor.commit();
@@ -43,7 +43,7 @@ public class SessionManager {
     }
 
     public void checkLogin(){
-        if(!this.IS_LOGIN){
+        if(!this.isLoggedIn()){
             Intent intent = new Intent(_context, Login.class);
             // flag to close all the activity
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -52,6 +52,22 @@ public class SessionManager {
             // stating loign activity
             _context.startActivity(intent);
         }
+    }
+
+    public void logoutUser(){
+        editor.clear();
+        editor.commit();
+        Intent intent = new Intent(_context, Login.class);
+        // flag to close all the activity
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        // new flag to start new activity
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // stating loign activity
+        _context.startActivity(intent);
+    }
+
+    public boolean isLoggedIn(){
+        return shrdPref.getBoolean(IS_LOGIN, false);
     }
 
 }
