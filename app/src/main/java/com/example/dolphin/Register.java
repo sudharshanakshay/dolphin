@@ -1,16 +1,16 @@
 package com.example.dolphin;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.dolphin.Auth.Authenticate;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static java.util.regex.Pattern.compile;
 
 public class Register extends AppCompatActivity {
 
@@ -18,6 +18,9 @@ public class Register extends AppCompatActivity {
     EditText username, password, name, email;
 
     String regularExpression = "^([A-Z]+)([a-z0-9]*)([@$!][A-Za-z0-9])";
+
+    Authenticate authenticate = new Authenticate();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +43,12 @@ public class Register extends AppCompatActivity {
                 String r_email = email.getText().toString();
                 String r_password = password.getText().toString();
 
-                if (!validatePassword(r_password)) {
+                if (r_password.length()<0) {
                     Toast.makeText(Register.this, "password has some constraint!", Toast.LENGTH_SHORT).show();
                 } else {
-
-
+                    Authenticate.SignUp signUpClass = authenticate.new SignUp(r_name, r_username, r_email, r_password);
+                    Thread signupThread = new Thread(signUpClass);
+                    signupThread.start();
                 }
             }
         });
