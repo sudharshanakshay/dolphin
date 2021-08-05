@@ -1,4 +1,5 @@
 package com.example.dolphin;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class Register extends AppCompatActivity {
 
-    Button signUp_button;
+    Button signUp_button, redirect_to_login;
     EditText username, password, name, email;
 
     String regularExpression = "^([A-Z]+)([a-z0-9]*)([@$!][A-Za-z0-9])";
@@ -34,6 +35,7 @@ public class Register extends AppCompatActivity {
 
 
         signUp_button = (Button) findViewById(R.id.signIn);
+        redirect_to_login = (Button)findViewById(R.id.b_redirectToLogin);
 
         signUp_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +52,16 @@ public class Register extends AppCompatActivity {
                     Thread signupThread = new Thread(signUpClass);
                     signupThread.start();
                 }
+            }
+        });
+
+        redirect_to_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Register.this, Login.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 
