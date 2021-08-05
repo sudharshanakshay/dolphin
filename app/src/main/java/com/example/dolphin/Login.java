@@ -31,6 +31,10 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 String l_username = username.getText().toString();
                 String l_password = password.getText().toString();
+                if(true){
+                    Intent intent = new Intent(Login.this, Post.class);
+                    startActivity(intent);
+                }
             }
 
 
