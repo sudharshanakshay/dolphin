@@ -4,22 +4,22 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dolphin.model.ListPost;
+import com.example.dolphin.model.ListItem;
 
 import java.util.List;
 
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
-    private List<ListPost> ListItems;
+    private List<ListItem> listItems;
     private Context context;
 
-    public DataAdapter(List<ListPost> listItems, Context context) {
-        ListItems = listItems;
+    public DataAdapter(List<ListItem> listItems, Context context) {
+        this.listItems = listItems;
         this.context = context;
     }
 
@@ -33,28 +33,29 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ListPost listPosts = ListItems.get(position);
 
-        holder.textViewHead.setText(listPosts.getHead());
-        holder.textViewDescription.setText(listPosts.getDescription());
+        ListItem listItem = listItems.get(position);
+
+        holder.head.setText(listItem.getHead());
+        holder.description.setText(listItem.getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return ListItems.size();
+        return listItems.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView textViewHead;
-        public TextView textViewDescription;
+        public EditText head;
+        public EditText description;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textViewHead = (TextView) itemView.findViewById(R.id.textViewHead);
-            textViewHead = (TextView) itemView.findViewById(R.id.textViewDescription);
+            head = itemView.findViewById(R.id.textViewHead);
+            description = itemView.findViewById(R.id.textViewDescription);
         }
     }
 }

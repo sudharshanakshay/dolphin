@@ -14,14 +14,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+            <EditText
                 android:id="@+id/textViewHead"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Head"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-            <TextView
+            <EditText
                 android:id="@+id/textViewDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
