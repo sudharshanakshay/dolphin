@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +38,8 @@ public class Register extends AppCompatActivity {
         signUp_button = (Button) findViewById(R.id.signIn);
         redirect_to_login = (Button)findViewById(R.id.b_redirectToLogin);
 
+        final Authenticate.SignUp[] signUpClass = new Authenticate.SignUp[1];
+
         signUp_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,12 +48,18 @@ public class Register extends AppCompatActivity {
                 String r_email = email.getText().toString();
                 String r_password = password.getText().toString();
 
+
+                ProgressBar progressBar;
+
                 if (r_password.length()<0) {
                     Toast.makeText(Register.this, "password has some constraint!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Authenticate.SignUp signUpClass = authenticate.new SignUp(r_name, r_username, r_email, r_password);
-                    Thread signupThread = new Thread(signUpClass);
-                    signupThread.start();
+                    signUpClass[0] = authenticate.new SignUp(r_username, r_name,r_email, r_password, Register.this);
+                    if(!signUpClass[0].isAlive()){
+                        signUpClass[0].start();
+                        progressBar = new ProgressBar(Register.this, null);
+                        progressBar.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });

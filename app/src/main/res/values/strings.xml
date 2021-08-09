@@ -4,4 +4,8 @@
     <string name="prompt_password">Password</string>
     <string name="name">Name</string>
     <string name="username">Username</string>
+    <string name="title_activity_landing">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

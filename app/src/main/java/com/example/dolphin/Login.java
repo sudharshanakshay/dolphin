@@ -9,11 +9,14 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.dolphin.Auth.Authenticate;
+
 public class Login extends AppCompatActivity {
 
     Button signIn_button, redirect_to_register;
     EditText username,password ;
     Context _context;
+    Authenticate authenticate = new Authenticate();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +34,18 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 String l_username = username.getText().toString();
                 String l_password = password.getText().toString();
+//
+//                if (l_password.length()<0) {
+//                    Toast.makeText(Login.this, "password has some constraint!", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Authenticate.Login login = authenticate.new Login(l_username,l_password, Login.this);
+//                    Thread signupThread = new Thread(login);
+//                    signupThread.start();
+//                    signIn_button.setEnabled(false);
+//                }
+
                 if(true){
-                    Intent intent = new Intent(Login.this, Post.class);
+                    Intent intent = new Intent(Login.this, LandingActivity.class);
                     startActivity(intent);
                 }
             }

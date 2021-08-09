@@ -1,67 +1,123 @@
 package com.example.dolphin.Auth;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
+import android.content.Context;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Authenticate {
 
-    public class SignUp implements  Runnable{
+    public class SignUp extends Thread  {
         private final String username;
         private final String name;
         private final String email;
         private final String password;
-        URL signUp_url;
 
-        public SignUp(String username, String name, String email, String password){
+        Context context;
+
+        public SignUp(String username, String name, String email, String password, Context context){
 
             this.username = username;
             this.name = name;
             this.email = email;
             this.password = password;
+            this.context = context;
         }
 
-
-
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         public void run() {
             try {
-                signUp_url = new URL("https://localhost:8000/SignUp.php");
+                String postUrl = "http://c315976b08f5.ngrok.io/signup.php";
 
-                String data = URLEncoder.encode("name", "UTF-8")
-                        + "=" + URLEncoder.encode(name, "UTF-8");
-                data += "&" + URLEncoder.encode("username", "UTF-8")
-                        + "=" + URLEncoder.encode(username, "UTF-8");
-                data += "&" + URLEncoder.encode("email", "UTF-8")
-                        + "=" + URLEncoder.encode(email, "UTF-8");
-                data += "&" + URLEncoder.encode("password", "UTF-8")
-                        + "=" + URLEncoder.encode(password, "UTF-8");
+                RequestQueue requestQueue = Volley.newRequestQueue(context);
 
+                JSONObject jsonObject = new JSONObject();
 
+                jsonObject.put("username", username);
+                jsonObject.put("name", name);
+                jsonObject.put("email", email);
+                jsonObject.put("password", password);
 
-                HttpURLConnection con = (HttpURLConnection) signUp_url.openConnection();
-                con.setRequestMethod("POST");
-                con.setDoOutput(true);
-                OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
-                wr.write(data);
-                if(con.getResponseCode()==200){
-                    System.out.println(con.getResponseMessage());
-                }
-                wr.flush();
-                con.disconnect();
+                System.out.println(jsonObject.toString());
 
-//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-//            StringBuilder stringBuilder = new StringBuilder();
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                        postUrl,
+                        jsonObject,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                System.out.println(response);
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                });
 
+                requestQueue.add(jsonObjectRequest);
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public class Login extends Thread  {
+        protected String username;
+        protected String password;
+        protected Context context;
+
+        public Login(String username, String password, Context context) {
+            this.username = username;
+            this.password = password;
+            this.context = context;
+        }
+
+        @Override
+        public void run() {
+            String loginUrl = "http://c315976b08f5.ngrok.io/signin.php";
+
+            RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+            JSONObject signInData = new JSONObject();
+
+            try {
+                signInData.put("username", username);
+                signInData.put("password", password);
+
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                        loginUrl,
+                        signInData,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                System.out.println(response);
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                });
+
+                requestQueue.add(jsonObjectRequest);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }
