@@ -38,7 +38,7 @@ public class Authenticate {
         @Override
         public void run() {
             try {
-                String postUrl = "http://c315976b08f5.ngrok.io/signup.php";
+                String postUrl = "http://a70c8ac2e069.ngrok.io/signup.php";
 
                 RequestQueue requestQueue = Volley.newRequestQueue(context);
 
@@ -59,7 +59,8 @@ public class Authenticate {
                             public void onResponse(JSONObject response) {
                                 System.out.println(response);
                             }
-                        }, new Response.ErrorListener() {
+                        },
+                    new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
@@ -87,7 +88,7 @@ public class Authenticate {
 
         @Override
         public void run() {
-            String loginUrl = "http://c315976b08f5.ngrok.io/signin.php";
+            String loginUrl = "http://a70c8ac2e069.ngrok.io/signin.php";
 
             RequestQueue requestQueue = Volley.newRequestQueue(context);
 

@@ -1,4 +1,4 @@
-package com.example.dolphin;
+package com.example.dolphin.Auth;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.dolphin.Auth.Authenticate;
+import com.example.dolphin.LandingActivity;
+import com.example.dolphin.R;
 
 public class Login extends AppCompatActivity {
 
@@ -34,14 +35,14 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 String l_username = username.getText().toString();
                 String l_password = password.getText().toString();
-//
+
 //                if (l_password.length()<0) {
-//                    Toast.makeText(Login.this, "password has some constraint!", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Login.this, "please enter password..", Toast.LENGTH_SHORT).show();
 //                } else {
 //                    Authenticate.Login login = authenticate.new Login(l_username,l_password, Login.this);
-//                    Thread signupThread = new Thread(login);
-//                    signupThread.start();
-//                    signIn_button.setEnabled(false);
+//                    if(!login.isAlive()){
+//                        login.start();
+//                    }
 //                }
 
                 if(true){

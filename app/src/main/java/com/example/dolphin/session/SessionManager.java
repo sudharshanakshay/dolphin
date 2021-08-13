@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.example.dolphin.Login;
+import com.example.dolphin.Auth.Login;
 
 import java.util.HashMap;
 
@@ -19,6 +19,7 @@ public class SessionManager {
     //pref file name
     private  String PREF_NAME = "dolphinPref";
     private  String IS_LOGIN = "is_login";
+    private  String KEY_USERNAME = "username";
     public   String KEY_NAME = "name";
     public   String KEY_EMAIL = "email";
 
@@ -28,16 +29,17 @@ public class SessionManager {
         editor = shrdPref.edit();
     }
 
-    public void createLoginSession(String name, String email){
+    public void createLoginSession(String name, String username){
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_NAME, name);
-        editor.putString(KEY_EMAIL, email);
+        editor.putString(KEY_USERNAME, username);
         editor.commit();
     }
 
     public HashMap<String, String> getUserDetail(){
         HashMap<String, String> user = new HashMap<String, String>();
         user.put(KEY_NAME, shrdPref.getString(KEY_NAME, null));
+        user.put(KEY_USERNAME, shrdPref.getString(KEY_USERNAME, null));
         user.put(KEY_EMAIL, shrdPref.getString(KEY_EMAIL, null));
         return  user;
     }

@@ -9,16 +9,16 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dolphin.model.ListItem;
+import com.example.dolphin.model.Post;
 
 import java.util.List;
 
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
-    private List<ListItem> listItems;
+    private List<Post> listItems;
     private Context context;
 
-    public DataAdapter(List<ListItem> listItems, Context context) {
+    public DataAdapter(List<Post> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
     }
@@ -34,9 +34,10 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        ListItem listItem = listItems.get(position);
+        Post listItem = listItems.get(position);
 
-        holder.head.setText(listItem.getHead());
+        //holder.supporting_url = listItem.getSupporting_url();
+        holder.caption.setText(listItem.getCaption());
         holder.description.setText(listItem.getDescription());
     }
 
@@ -47,14 +48,15 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public EditText head;
+        public String supporting_url;
+        public EditText caption;
         public EditText description;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            head = itemView.findViewById(R.id.textViewHead);
+            caption = itemView.findViewById(R.id.textViewCaption);
             description = itemView.findViewById(R.id.textViewDescription);
         }
     }

@@ -1,4 +1,4 @@
-package com.example.dolphin;
+package com.example.dolphin.Auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.dolphin.Auth.Authenticate;
+import com.example.dolphin.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -52,7 +52,7 @@ public class Register extends AppCompatActivity {
                 ProgressBar progressBar;
 
                 if (r_password.length()<0) {
-                    Toast.makeText(Register.this, "password has some constraint!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, "please enter password..", Toast.LENGTH_SHORT).show();
                 } else {
                     signUpClass[0] = authenticate.new SignUp(r_username, r_name,r_email, r_password, Register.this);
                     if(!signUpClass[0].isAlive()){

@@ -15,9 +15,9 @@
         <activity
             android:name=".LandingActivity"
             android:label="@string/title_activity_landing"></activity>
-        <activity android:name=".Post" />
-        <activity android:name=".Register" />
-        <activity android:name=".Login" />
+        <activity android:name=".PostPage" />
+        <activity android:name=".Auth.Register" />
+        <activity android:name=".Auth.Login" />
         <activity android:name=".SignUp" />
         <activity android:name=".login" />
         <activity android:name=".MainActivity">
