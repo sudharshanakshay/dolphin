@@ -3,6 +3,8 @@
     package="com.example.dolphin">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -15,11 +17,9 @@
         <activity
             android:name=".LandingActivity"
             android:label="@string/title_activity_landing"></activity>
-        <activity android:name=".PostPage" />
+<!--        <activity android:name=".PostPage" />-->
         <activity android:name=".Auth.Register" />
         <activity android:name=".Auth.Login" />
-        <activity android:name=".SignUp" />
-        <activity android:name=".login" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

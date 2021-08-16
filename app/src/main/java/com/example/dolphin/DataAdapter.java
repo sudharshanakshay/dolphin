@@ -4,7 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +37,10 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
         Post listItem = listItems.get(position);
 
+        //holder.image.setImageBitmap(listItem.getImage());
         //holder.supporting_url = listItem.getSupporting_url();
+
+        //Glide.with(context).load(listItem.getImage_url()).into(holder.image);
         holder.caption.setText(listItem.getCaption());
         holder.description.setText(listItem.getDescription());
     }
@@ -48,14 +52,16 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public String supporting_url;
-        public EditText caption;
-        public EditText description;
+        private ImageView image;
+        private String supporting_url;
+        private TextView caption;
+        private TextView description;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            image = itemView.findViewById(R.id.feed_image);
             caption = itemView.findViewById(R.id.textViewCaption);
             description = itemView.findViewById(R.id.textViewDescription);
         }
