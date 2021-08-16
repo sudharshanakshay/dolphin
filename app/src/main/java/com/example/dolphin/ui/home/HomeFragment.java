@@ -115,12 +115,14 @@ public class HomeFragment extends Fragment {
                             feeds.clear();
                             for( i=0; i<response.length(); i++){
                                 Post post = new Post(
-                                        response.getJSONArray(i).getString(0),
+                                        new URL(response.getJSONArray(i).getString(0)),
                                         response.getJSONArray(i).getString(1),
                                         response.getJSONArray(i).getString(2),
                                         response.getJSONArray(i).getString(3)
                                 );
+
                                 feeds.add(post);
+                                System.out.println(feeds.get(i).getImage_url());
                                 System.out.println(feeds.get(i).getCaption());
                                 System.out.println(feeds.get(i).getDescription());
                                 System.out.println(feeds.get(i).getSupporting_url());

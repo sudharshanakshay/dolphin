@@ -1,13 +1,15 @@
 package com.example.dolphin.model;
 
+import java.net.URL;
+
 public class Post {
     //private Bitmap image;
-    private String image_url;
+    private URL image_url;
     private String description;
     private String supporting_url;
     private String caption;
 
-    public Post(String image_url, String supporting_url,String caption,String description) {
+    public Post(URL image_url, String supporting_url,String caption,String description) {
         this.image_url = image_url;
         this.caption = caption;
         this.description = description;
@@ -15,11 +17,7 @@ public class Post {
 
     }
 
-    public String getImage_url() {
-        return image_url;
-    }
-
-    public String getImage() {
+    public URL getImage_url() {
         return image_url;
     }
 

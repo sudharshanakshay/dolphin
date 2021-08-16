@@ -10,8 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.example.dolphin.model.Post;
 
+import java.net.URL;
 import java.util.List;
 
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
@@ -29,18 +31,22 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_post, parent,false);
+
+
         return new ViewHolder(v);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         Post listItem = listItems.get(position);
 
-        //holder.image.setImageBitmap(listItem.getImage());
-        //holder.supporting_url = listItem.getSupporting_url();
+        URL imageUrl = listItem.getImage_url();
+        ImageLoader imageLoader = VolleyImageLOoader.getInstance(context).getImageLoader();
+        //TODO: typecast 'image_url'back to String from URL
+        imageLoader.get(String.valueOf(imageUrl), ImageLoader.getImageListener(holder.image, R.mipmap.ic_launcher, android.R.drawable.ic_dialog_alert));
 
-        //Glide.with(context).load(listItem.getImage_url()).into(holder.image);
         holder.caption.setText(listItem.getCaption());
         holder.description.setText(listItem.getDescription());
     }
