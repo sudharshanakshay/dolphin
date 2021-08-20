@@ -3,8 +3,8 @@
     package="com.example.dolphin">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,10 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".LeftSlidePage"></activity>
         <activity
             android:name=".LandingActivity"
-            android:label="@string/title_activity_landing"></activity>
-<!--        <activity android:name=".PostPage" />-->
+            android:label="@string/title_activity_landing" /> <!-- <activity android:name=".PostPage" /> -->
         <activity android:name=".Auth.Register" />
         <activity android:name=".Auth.Login" />
         <activity android:name=".MainActivity">

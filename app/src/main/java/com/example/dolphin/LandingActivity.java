@@ -1,5 +1,6 @@
 package com.example.dolphin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -46,6 +47,12 @@ public class LandingActivity extends AppCompatActivity {
     public void makeToast(String message){
         Toast.makeText(LandingActivity.this, message, Toast.LENGTH_SHORT).show();
     }
+
+    public void onSwipeRight(){
+        Intent intent = new Intent(this, LeftSlidePage.class);
+        startActivity(intent);
+    }
+
     public class SwipeDetector extends GestureDetector.SimpleOnGestureListener{
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
@@ -54,12 +61,12 @@ public class LandingActivity extends AppCompatActivity {
                 return false;
             }
 
-            makeToast( "start = "+String.valueOf( e1.getX() )+" | end = "+String.valueOf( e2.getX() )  );
+            //makeToast( "start = "+String.valueOf( e1.getX() )+" | end = "+String.valueOf( e2.getX() )  );
 
             // from left to right
             if(e2.getX() > e1.getX()){
                 if(Math.abs(e2.getX()-e1.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX)>SWIPE_THRESHOLD_VELOCITY){
-                    //onSwipeLeft();
+                    onSwipeRight();
                     return true;
                 }
                 return false;
@@ -93,4 +100,5 @@ public class LandingActivity extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent event) {
         return gestureDetector.onTouchEvent(event);
     }
+
 }
